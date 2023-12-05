@@ -1,0 +1,169 @@
+@import url("https://fonts.googleapis.com/css2?family=Bai+Jamjuree&family=Barlow+Semi+Condensed&family=Inter:wght@400;700&family=Josefin+Sans:wght@700&family=League+Spartan:wght@700&family=Manrope:wght@600&family=Open+Sans&family=Outfit&family=Overpass&family=Poppins:ital,wght@0,300;0,400;1,400&family=Raleway:wght@700&family=Red+Hat+Text:wght@700&family=Rubik&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: League Spartan, sans-serif;
+}
+
+body {
+  background-color: hsl(180, 52%, 86%);
+}
+
+.header {
+  height: 150px;
+  background-image: url(images/bg-header-desktop.svg);
+  background-color: hsl(180, 29%, 50%);
+  margin-bottom: 30px;
+  color: lightblue;
+}
+
+.photosnap {
+  color: hsl(180, 52%, 46%);
+}
+
+.new {
+  background-color: hsl(180, 52%, 46%);
+  color: white;
+  padding: 8px;
+  border-radius: 20px;
+  font-size: 12px;
+  text-align: center;
+}
+
+.featured {
+  background-color: hsl(180, 14%, 20%);
+  color: white;
+  padding: 8px;
+  border-radius: 20px;
+  font-size: 12px;
+  text-align: center;
+}
+
+.right {
+  display: flex;
+  gap: 20px;
+}
+
+.specify {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.details {
+  gap: 10px;
+}
+
+.element {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  box-shadow: 2px 2px 2px gray;
+  margin-bottom: 25px;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.list {
+  width: 85%;
+}
+
+.left span {
+  background-color: hsl(180, 31%, 85%);
+  color: hsl(180, 31%, 25%);
+  padding: 4px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.left span:hover {
+  background-color: hsl(180, 31%, 25%);
+  color: hsl(180, 31%, 85%);
+}
+
+.left {
+  gap: 10px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+}
+
+.gray {
+  color: gray;
+}
+
+.p {
+  font-size: 17px;
+}
+
+.one {
+  border-left: solid hsl(180, 52%, 36%) 4px;
+}
+
+.two {
+  border-left: solid hsl(180, 52%, 36%) 4px;
+}
+
+#toolBar {
+  background-color: white;
+  margin-bottom: 20px;
+  height: 60px;
+  display: none;
+  justify-content: left;
+}
+
+.Frontend {
+  display: flex;
+  align-items: center;
+}
+
+.Frontend span {
+  background-color: hsl(180, 31%, 85%);
+  color: hsl(180, 31%, 25%);
+  padding: 5px;
+  height: 13px;
+}
+
+.Frontend img {
+  background-color: hsl(180, 31%, 45%);
+  padding: 5px;
+  cursor: pointer;
+  height: 13px;
+  margin-right: 15px;
+}
+
+.Frontend img:hover {
+  background-color: hsl(180, 31%, 25%);
+}
+
+.first {
+  margin-left: 20px;
+  display: none;
+}
+.nr2 {
+  display: none;
+}
+.nr3 {
+  display: none;
+}
+.nr4 {
+  display: none;
+}
+.nr5 {
+  display: none;
+}
+.nr6 {
+  display: none;
+}
+.nr7 {
+  display: none;
+}
