@@ -1,153 +1,548 @@
-const option = document.querySelectorAll(".leftSpan");
-const toolBar = document.getElementById("toolBar");
-const filter1 = document.getElementById("filter1");
-const filter2 = document.getElementById("filter2");
-const filter3 = document.getElementById("filter3");
-const filter4 = document.getElementById("filter4");
-const filter5 = document.getElementById("filter5");
-const filter6 = document.getElementById("filter6");
-const filter7 = document.getElementById("filter7");
-const filter8 = document.getElementById("filter8");
-const filter9 = document.getElementById("filter9");
-const filter10 = document.getElementById("filter10");
-const filter11 = document.getElementById("filter11");
-const filter12 = document.getElementById("filter12");
-const filter13 = document.getElementById("filter13");
-const filter14 = document.getElementById("filter14");
-const filter15 = document.getElementById("filter15");
-const filter16 = document.getElementById("filter16");
-const x1 = document.getElementsByClassName("delete1")[0];
-const x2 = document.getElementsByClassName("delete2")[0];
-const x3 = document.getElementsByClassName("delete3")[0];
-const x4 = document.getElementsByClassName("delete4")[0];
-const x5 = document.getElementsByClassName("delete5")[0];
-const x6 = document.getElementsByClassName("delete6")[0];
-const x7 = document.getElementsByClassName("delete7")[0];
-const x8 = document.getElementsByClassName("delete8")[0];
-const x9 = document.getElementsByClassName("delete9")[0];
-const x10 = document.getElementsByClassName("delete10")[0];
-const x11 = document.getElementsByClassName("delete11")[0];
-const x12 = document.getElementsByClassName("delete12")[0];
-const x13 = document.getElementsByClassName("delete13")[0];
-const x14 = document.getElementsByClassName("delete14")[0];
-const x15 = document.getElementsByClassName("delete15")[0];
-const x16 = document.getElementsByClassName("delete16")[0];
+"use strict";
 
-option.forEach((element) => {
-  element.addEventListener("click", function () {
-    toolBar.style.display = "flex";
-    if (element.innerText === "Frontend") {
-      filter1.style.display = "flex";
+const buttons = document.querySelectorAll(".leftSpan");
+const sorting = document.querySelector(".sorting");
+const options = document.querySelectorAll(".Frontend");
+const erase = document.querySelectorAll(".delete");
+const clear = document.querySelector(".clear");
+const toolBar = document.querySelector(".toolBar");
+const elementOne = document.getElementById("elementOne");
+const elementTwo = document.getElementById("elementTwo");
+
+console.log(options);
+
+clear.addEventListener("click", function () {
+  sorting.classList.add("hidden");
+  options[0].classList.add("hidden");
+  options[1].classList.add("hidden");
+  options[2].classList.add("hidden");
+  options[3].classList.add("hidden");
+  options[4].classList.add("hidden");
+  options[5].classList.add("hidden");
+  options[6].classList.add("hidden");
+  options[7].classList.add("hidden");
+  options[8].classList.add("hidden");
+  options[9].classList.add("hidden");
+  options[10].classList.add("hidden");
+  options[11].classList.add("hidden");
+  options[12].classList.add("hidden");
+  options[13].classList.add("hidden");
+  options[14].classList.add("hidden");
+  options[15].classList.add("hidden");
+});
+
+for (let i = 0; i < erase.length; i++) {
+  erase[i].addEventListener("click", function () {
+    options[i].classList.add("hidden");
+    checkSortingVisibility();
+  });
+}
+
+for (let i = 0; i < buttons.length; i++) {
+  buttons[0].addEventListener("click", function () {
+    sorting.classList.remove("hidden");
+    clear.classList.remove("hidden");
+    for (let i = 0; i < options.length; i++) {
+      options[0].classList.remove("hidden");
     }
-    if (element.innerText === "Senior") {
-      filter2.style.display = "flex";
+    checkSortingVisibility();
+  });
+}
+
+for (let i = 0; i < buttons.length; i++) {
+  buttons[1].addEventListener("click", function () {
+    sorting.classList.remove("hidden");
+    clear.classList.remove("hidden");
+    for (let i = 0; i < options.length; i++) {
+      options[1].classList.remove("hidden");
     }
-    if (element.innerText === "HTML") {
-      filter3.style.display = "flex";
+    checkSortingVisibility();
+  });
+}
+
+for (let i = 0; i < buttons.length; i++) {
+  buttons[2].addEventListener("click", function () {
+    clear.classList.remove("hidden");
+    sorting.classList.remove("hidden");
+    for (let i = 0; i < options.length; i++) {
+      options[2].classList.remove("hidden");
     }
-    if (element.innerText === "CSS") {
-      filter4.style.display = "flex";
-    }
-    if (element.innerText === "JavaScript") {
-      filter5.style.display = "flex";
-    }
-    if (element.innerText === "Fullstack") {
-      filter6.style.display = "flex";
-    }
-    if (element.innerText === "Midweight") {
-      filter7.style.display = "flex";
-    }
-    if (element.innerText === "Python") {
-      filter8.style.display = "flex";
-    }
-    if (element.innerText === "React") {
-      filter9.style.display = "flex";
-    }
-    if (element.innerText === "Junior") {
-      filter10.style.display = "flex";
-    }
-    if (element.innerText === "Sass") {
-      filter11.style.display = "flex";
-    }
-    if (element.innerText === "Ruby") {
-      filter12.style.display = "flex";
-    }
-    if (element.innerText === "Backend") {
-      filter13.style.display = "flex";
-    }
-    if (element.innerText === "Ror") {
-      filter14.style.display = "flex";
-    }
-    if (element.innerText === "Vue") {
-      filter15.style.display = "flex";
-    }
-    if (element.innerText === "Django") {
-      filter16.style.display = "flex";
+    checkSortingVisibility();
+  });
+}
+
+for (let i = 0; i < buttons.length; i++) {
+  buttons[3].addEventListener("click", function () {
+    clear.classList.remove("hidden");
+    sorting.classList.remove("hidden");
+    for (let i = 0; i < options.length; i++) {
+      options[3].classList.remove("hidden");
+      checkSortingVisibility();
     }
   });
-});
+}
 
-x1.addEventListener("click", function () {
-  filter1.remove();
-  checkAndHideToolBar();
-});
-x2.addEventListener("click", function () {
-  filter2.remove();
-  checkAndHideToolBar();
-});
-x3.addEventListener("click", function () {
-  filter3.remove();
-  checkAndHideToolBar();
-});
-x4.addEventListener("click", function () {
-  filter4.remove();
-  checkAndHideToolBar();
-});
-x5.addEventListener("click", function () {
-  filter5.remove();
-  checkAndHideToolBar();
-});
-x6.addEventListener("click", function () {
-  filter6.remove();
-  checkAndHideToolBar();
-});
-x7.addEventListener("click", function () {
-  filter7.remove();
-  checkAndHideToolBar();
-});
-x8.addEventListener("click", function () {
-  filter8.remove();
-  checkAndHideToolBar();
-});
-x9.addEventListener("click", function () {
-  filter9.remove();
-  checkAndHideToolBar();
-});
-x10.addEventListener("click", function () {
-  filter10.remove();
-  checkAndHideToolBar();
-});
-x11.addEventListener("click", function () {
-  filter11.remove();
-  checkAndHideToolBar();
-});
-x12.addEventListener("click", function () {
-  filter12.remove();
-  checkAndHideToolBar();
-});
-x13.addEventListener("click", function () {
-  filter13.remove();
-  checkAndHideToolBar();
-});
-x14.addEventListener("click", function () {
-  filter14.remove();
-  checkAndHideToolBar();
-});
-x15.addEventListener("click", function () {
-  filter15.remove();
-  checkAndHideToolBar();
-});
-x16.addEventListener("click", function () {
-  filter16.remove();
-  checkAndHideToolBar();
-});
+for (let i = 0; i < buttons.length; i++) {
+  buttons[4].addEventListener("click", function () {
+    clear.classList.remove("hidden");
+    sorting.classList.remove("hidden");
+    for (let i = 0; i < options.length; i++) {
+      options[4].classList.remove("hidden");
+      checkSortingVisibility();
+    }
+  });
+}
+
+for (let i = 0; i < buttons.length; i++) {
+  buttons[5].addEventListener("click", function () {
+    clear.classList.remove("hidden");
+    sorting.classList.remove("hidden");
+    for (let i = 0; i < options.length; i++) {
+      options[5].classList.remove("hidden");
+      checkSortingVisibility();
+    }
+  });
+}
+
+for (let i = 0; i < buttons.length; i++) {
+  buttons[6].addEventListener("click", function () {
+    clear.classList.remove("hidden");
+    sorting.classList.remove("hidden");
+    for (let i = 0; i < options.length; i++) {
+      options[6].classList.remove("hidden");
+      checkSortingVisibility();
+    }
+  });
+}
+
+for (let i = 0; i < buttons.length; i++) {
+  buttons[7].addEventListener("click", function () {
+    clear.classList.remove("hidden");
+    sorting.classList.remove("hidden");
+    for (let i = 0; i < options.length; i++) {
+      options[7].classList.remove("hidden");
+      checkSortingVisibility();
+    }
+  });
+}
+
+for (let i = 0; i < buttons.length; i++) {
+  buttons[8].addEventListener("click", function () {
+    clear.classList.remove("hidden");
+    sorting.classList.remove("hidden");
+    for (let i = 0; i < options.length; i++) {
+      options[8].classList.remove("hidden");
+      checkSortingVisibility();
+    }
+  });
+}
+
+for (let i = 0; i < buttons.length; i++) {
+  buttons[9].addEventListener("click", function () {
+    clear.classList.remove("hidden");
+    sorting.classList.remove("hidden");
+    for (let i = 0; i < options.length; i++) {
+      options[0].classList.remove("hidden");
+      checkSortingVisibility();
+    }
+  });
+}
+
+for (let i = 0; i < buttons.length; i++) {
+  buttons[10].addEventListener("click", function () {
+    clear.classList.remove("hidden");
+    sorting.classList.remove("hidden");
+    for (let i = 0; i < options.length; i++) {
+      options[9].classList.remove("hidden");
+      checkSortingVisibility();
+    }
+  });
+}
+
+for (let i = 0; i < buttons.length; i++) {
+  buttons[11].addEventListener("click", function () {
+    clear.classList.remove("hidden");
+    sorting.classList.remove("hidden");
+    for (let i = 0; i < options.length; i++) {
+      options[8].classList.remove("hidden");
+      checkSortingVisibility();
+    }
+  });
+}
+
+for (let i = 0; i < buttons.length; i++) {
+  buttons[12].addEventListener("click", function () {
+    clear.classList.remove("hidden");
+    sorting.classList.remove("hidden");
+    for (let i = 0; i < options.length; i++) {
+      options[10].classList.remove("hidden");
+      checkSortingVisibility();
+    }
+  });
+}
+
+for (let i = 0; i < buttons.length; i++) {
+  buttons[13].addEventListener("click", function () {
+    clear.classList.remove("hidden");
+    sorting.classList.remove("hidden");
+    for (let i = 0; i < options.length; i++) {
+      options[4].classList.remove("hidden");
+      checkSortingVisibility();
+    }
+  });
+}
+
+for (let i = 0; i < buttons.length; i++) {
+  buttons[14].addEventListener("click", function () {
+    clear.classList.remove("hidden");
+    sorting.classList.remove("hidden");
+    for (let i = 0; i < options.length; i++) {
+      options[0].classList.remove("hidden");
+      checkSortingVisibility();
+    }
+  });
+}
+
+for (let i = 0; i < buttons.length; i++) {
+  buttons[15].addEventListener("click", function () {
+    clear.classList.remove("hidden");
+    sorting.classList.remove("hidden");
+    for (let i = 0; i < options.length; i++) {
+      options[9].classList.remove("hidden");
+      checkSortingVisibility();
+    }
+  });
+}
+
+for (let i = 0; i < buttons.length; i++) {
+  buttons[16].addEventListener("click", function () {
+    clear.classList.remove("hidden");
+    sorting.classList.remove("hidden");
+    for (let i = 0; i < options.length; i++) {
+      options[3].classList.remove("hidden");
+      checkSortingVisibility();
+    }
+  });
+}
+for (let i = 0; i < buttons.length; i++) {
+  buttons[17].addEventListener("click", function () {
+    clear.classList.remove("hidden");
+    sorting.classList.remove("hidden");
+    for (let i = 0; i < options.length; i++) {
+      options[4].classList.remove("hidden");
+      checkSortingVisibility();
+    }
+  });
+}
+for (let i = 0; i < buttons.length; i++) {
+  buttons[18].addEventListener("click", function () {
+    clear.classList.remove("hidden");
+    sorting.classList.remove("hidden");
+    for (let i = 0; i < options.length; i++) {
+      options[5].classList.remove("hidden");
+      checkSortingVisibility();
+    }
+  });
+}
+for (let i = 0; i < buttons.length; i++) {
+  buttons[19].addEventListener("click", function () {
+    sorting.classList.remove("hidden");
+    clear.classList.remove("hidden");
+    for (let i = 0; i < options.length; i++) {
+      options[6].classList.remove("hidden");
+      checkSortingVisibility();
+    }
+  });
+}
+for (let i = 0; i < buttons.length; i++) {
+  buttons[20].addEventListener("click", function () {
+    clear.classList.remove("hidden");
+    sorting.classList.remove("hidden");
+    for (let i = 0; i < options.length; i++) {
+      options[4].classList.remove("hidden");
+      checkSortingVisibility();
+    }
+  });
+}
+for (let i = 0; i < buttons.length; i++) {
+  buttons[20].addEventListener("click", function () {
+    clear.classList.remove("hidden");
+    sorting.classList.remove("hidden");
+    for (let i = 0; i < options.length; i++) {
+      options[4].classList.remove("hidden");
+      checkSortingVisibility();
+    }
+  });
+}
+for (let i = 0; i < buttons.length; i++) {
+  buttons[21].addEventListener("click", function () {
+    clear.classList.remove("hidden");
+    sorting.classList.remove("hidden");
+    for (let i = 0; i < options.length; i++) {
+      options[10].classList.remove("hidden");
+      checkSortingVisibility();
+    }
+  });
+}
+for (let i = 0; i < buttons.length; i++) {
+  buttons[22].addEventListener("click", function () {
+    clear.classList.remove("hidden");
+    sorting.classList.remove("hidden");
+    for (let i = 0; i < options.length; i++) {
+      options[11].classList.remove("hidden");
+      checkSortingVisibility();
+    }
+  });
+}
+for (let i = 0; i < buttons.length; i++) {
+  buttons[23].addEventListener("click", function () {
+    clear.classList.remove("hidden");
+    sorting.classList.remove("hidden");
+    for (let i = 0; i < options.length; i++) {
+      options[12].classList.remove("hidden");
+      checkSortingVisibility();
+    }
+  });
+}
+for (let i = 0; i < buttons.length; i++) {
+  buttons[24].addEventListener("click", function () {
+    clear.classList.remove("hidden");
+    sorting.classList.remove("hidden");
+    for (let i = 0; i < options.length; i++) {
+      options[9].classList.remove("hidden");
+      checkSortingVisibility();
+    }
+  });
+}
+for (let i = 0; i < buttons.length; i++) {
+  buttons[25].addEventListener("click", function () {
+    clear.classList.remove("hidden");
+    sorting.classList.remove("hidden");
+    for (let i = 0; i < options.length; i++) {
+      options[11].classList.remove("hidden");
+      checkSortingVisibility();
+    }
+  });
+}
+for (let i = 0; i < buttons.length; i++) {
+  buttons[26].addEventListener("click", function () {
+    clear.classList.remove("hidden");
+    sorting.classList.remove("hidden");
+    for (let i = 0; i < options.length; i++) {
+      options[13].classList.remove("hidden");
+      checkSortingVisibility();
+    }
+  });
+}
+for (let i = 0; i < buttons.length; i++) {
+  buttons[27].addEventListener("click", function () {
+    clear.classList.remove("hidden");
+    sorting.classList.remove("hidden");
+    for (let i = 0; i < options.length; i++) {
+      options[0].classList.remove("hidden");
+      checkSortingVisibility();
+    }
+  });
+}
+for (let i = 0; i < buttons.length; i++) {
+  buttons[28].addEventListener("click", function () {
+    clear.classList.remove("hidden");
+    sorting.classList.remove("hidden");
+    for (let i = 0; i < options.length; i++) {
+      options[9].classList.remove("hidden");
+      checkSortingVisibility();
+    }
+  });
+}
+for (let i = 0; i < buttons.length; i++) {
+  buttons[29].addEventListener("click", function () {
+    clear.classList.remove("hidden");
+    sorting.classList.remove("hidden");
+    for (let i = 0; i < options.length; i++) {
+      options[2].classList.remove("hidden");
+      checkSortingVisibility();
+    }
+  });
+}
+for (let i = 0; i < buttons.length; i++) {
+  buttons[30].addEventListener("click", function () {
+    clear.classList.remove("hidden");
+    sorting.classList.remove("hidden");
+    for (let i = 0; i < options.length; i++) {
+      options[10].classList.remove("hidden");
+      checkSortingVisibility();
+    }
+  });
+}
+for (let i = 0; i < buttons.length; i++) {
+  buttons[31].addEventListener("click", function () {
+    clear.classList.remove("hidden");
+    sorting.classList.remove("hidden");
+    for (let i = 0; i < options.length; i++) {
+      options[4].classList.remove("hidden");
+      checkSortingVisibility();
+    }
+  });
+}
+for (let i = 0; i < buttons.length; i++) {
+  buttons[32].addEventListener("click", function () {
+    clear.classList.remove("hidden");
+    sorting.classList.remove("hidden");
+    for (let i = 0; i < options.length; i++) {
+      options[0].classList.remove("hidden");
+      checkSortingVisibility();
+    }
+  });
+}
+for (let i = 0; i < buttons.length; i++) {
+  buttons[33].addEventListener("click", function () {
+    clear.classList.remove("hidden");
+    sorting.classList.remove("hidden");
+    for (let i = 0; i < options.length; i++) {
+      options[9].classList.remove("hidden");
+      checkSortingVisibility();
+    }
+  });
+}
+for (let i = 0; i < buttons.length; i++) {
+  buttons[34].addEventListener("click", function () {
+    clear.classList.remove("hidden");
+    sorting.classList.remove("hidden");
+    for (let i = 0; i < options.length; i++) {
+      options[14].classList.remove("hidden");
+      checkSortingVisibility();
+    }
+  });
+}
+for (let i = 0; i < buttons.length; i++) {
+  buttons[35].addEventListener("click", function () {
+    clear.classList.remove("hidden");
+    sorting.classList.remove("hidden");
+    for (let i = 0; i < options.length; i++) {
+      options[4].classList.remove("hidden");
+      checkSortingVisibility();
+    }
+  });
+}
+for (let i = 0; i < buttons.length; i++) {
+  buttons[36].addEventListener("click", function () {
+    clear.classList.remove("hidden");
+    sorting.classList.remove("hidden");
+    for (let i = 0; i < options.length; i++) {
+      options[10].classList.remove("hidden");
+      checkSortingVisibility();
+    }
+  });
+}
+for (let i = 0; i < buttons.length; i++) {
+  buttons[37].addEventListener("click", function () {
+    clear.classList.remove("hidden");
+    sorting.classList.remove("hidden");
+    for (let i = 0; i < options.length; i++) {
+      options[5].classList.remove("hidden");
+      checkSortingVisibility();
+    }
+  });
+}
+for (let i = 0; i < buttons.length; i++) {
+  buttons[38].addEventListener("click", function () {
+    clear.classList.remove("hidden");
+    sorting.classList.remove("hidden");
+    for (let i = 0; i < options.length; i++) {
+      options[6].classList.remove("hidden");
+      checkSortingVisibility();
+    }
+  });
+}
+for (let i = 0; i < buttons.length; i++) {
+  buttons[39].addEventListener("click", function () {
+    clear.classList.remove("hidden");
+    sorting.classList.remove("hidden");
+    for (let i = 0; i < options.length; i++) {
+      options[4].classList.remove("hidden");
+      checkSortingVisibility();
+    }
+  });
+}
+for (let i = 0; i < buttons.length; i++) {
+  buttons[40].addEventListener("click", function () {
+    clear.classList.remove("hidden");
+    sorting.classList.remove("hidden");
+    for (let i = 0; i < options.length; i++) {
+      options[15].classList.remove("hidden");
+      checkSortingVisibility();
+    }
+  });
+}
+for (let i = 0; i < buttons.length; i++) {
+  buttons[41].addEventListener("click", function () {
+    clear.classList.remove("hidden");
+    sorting.classList.remove("hidden");
+    for (let i = 0; i < options.length; i++) {
+      options[7].classList.remove("hidden");
+      checkSortingVisibility();
+    }
+  });
+}
+for (let i = 0; i < buttons.length; i++) {
+  buttons[42].addEventListener("click", function () {
+    clear.classList.remove("hidden");
+    sorting.classList.remove("hidden");
+    for (let i = 0; i < options.length; i++) {
+      options[0].classList.remove("hidden");
+      checkSortingVisibility();
+    }
+  });
+}
+for (let i = 0; i < buttons.length; i++) {
+  buttons[43].addEventListener("click", function () {
+    clear.classList.remove("hidden");
+    sorting.classList.remove("hidden");
+    for (let i = 0; i < options.length; i++) {
+      options[9].classList.remove("hidden");
+      checkSortingVisibility();
+    }
+  });
+}
+for (let i = 0; i < buttons.length; i++) {
+  buttons[44].addEventListener("click", function () {
+    clear.classList.remove("hidden");
+    sorting.classList.remove("hidden");
+    for (let i = 0; i < options.length; i++) {
+      options[8].classList.remove("hidden");
+      checkSortingVisibility();
+    }
+  });
+}
+for (let i = 0; i < buttons.length; i++) {
+  buttons[45].addEventListener("click", function () {
+    clear.classList.remove("hidden");
+    sorting.classList.remove("hidden");
+    for (let i = 0; i < options.length; i++) {
+      options[10].classList.remove("hidden");
+      checkSortingVisibility();
+    }
+  });
+}
+for (let i = 0; i < buttons.length; i++) {
+  buttons[46].addEventListener("click", function () {
+    clear.classList.remove("hidden");
+    sorting.classList.remove("hidden");
+    for (let i = 0; i < options.length; i++) {
+      options[4].classList.remove("hidden");
+      checkSortingVisibility();
+    }
+  });
+}
+
+function checkSortingVisibility() {
+  const visibleOptions = Array.from(options).filter(
+    (option) => !option.classList.contains("hidden")
+  );
+
+  sorting.classList.toggle("hidden", visibleOptions.length === 0);
+}
+
+while (options[0].classList.contains("hidden")) {
+  elementOne.classList.add("hidden");
+}

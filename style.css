@@ -117,8 +117,9 @@ body {
   background-color: white;
   margin-bottom: 20px;
   height: 60px;
-  display: none;
   justify-content: left;
+  display: flex;
+  width: 100%;
 }
 
 .Frontend {
@@ -145,25 +146,26 @@ body {
   background-color: hsl(180, 31%, 25%);
 }
 
-.first {
-  margin-left: 20px;
-  display: none;
+.sorting {
+  display: flex;
+  justify-content: space-around;
 }
-.nr2 {
-  display: none;
+
+.clear {
+  color: hsl(180, 31%, 55%);
+  padding: 22px;
+  align-items: center;
+  height: 16px;
+  text-align: center;
+  cursor: pointer;
+  background-color: white;
 }
-.nr3 {
-  display: none;
+
+.clear:hover {
+  color: darkblue;
+  text-decoration: underline;
 }
-.nr4 {
-  display: none;
-}
-.nr5 {
-  display: none;
-}
-.nr6 {
-  display: none;
-}
-.nr7 {
+
+.hidden {
   display: none;
 }

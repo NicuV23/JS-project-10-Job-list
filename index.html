@@ -16,68 +16,72 @@
   </head>
   <body>
     <div class="header"></div>
-
-    <div class="toolBar" id="toolBar">
-      <div id="filter1" class="Frontend first">
-        <span>Frontend</span>
-        <img class="delete1" src="images/icon-remove.svg" />
+    <div class="sorting hidden">
+      <div class="toolBar hidden" id="toolBar">
+        <div id="filter1" class="Frontend hidden">
+          <span>Frontend</span>
+          <img class="delete" src="images/icon-remove.svg" />
+        </div>
+        <div id="filter2" class="Frontend hidden">
+          <span>Senior</span>
+          <img class="delete" src="images/icon-remove.svg" />
+        </div>
+        <div id="filter3" class="Frontend hidden">
+          <span>HTML</span> <img class="delete" src="images/icon-remove.svg" />
+        </div>
+        <div id="filter4" class="Frontend hidden">
+          <span>CSS</span> <img class="delete" src="images/icon-remove.svg" />
+        </div>
+        <div id="filter5" class="Frontend hidden">
+          <span>JavaScript</span>
+          <img class="delete" src="images/icon-remove.svg" />
+        </div>
+        <div id="filter6" class="Frontend hidden">
+          <span>Fullstack</span>
+          <img class="delete" src="images/icon-remove.svg" />
+        </div>
+        <div id="filter7" class="Frontend hidden">
+          <span>Midweight</span>
+          <img class="delete" src="images/icon-remove.svg" />
+        </div>
+        <div id="filter8" class="Frontend hidden">
+          <span>Python</span>
+          <img class="delete" src="images/icon-remove.svg" />
+        </div>
+        <div id="filter9" class="Frontend hidden">
+          <span>React</span> <img class="delete" src="images/icon-remove.svg" />
+        </div>
+        <div id="filter10" class="Frontend hidden">
+          <span>Junior</span>
+          <img class="delete" src="images/icon-remove.svg" />
+        </div>
+        <div id="filter11" class="Frontend hidden">
+          <span>Sass</span> <img class="delete" src="images/icon-remove.svg" />
+        </div>
+        <div id="filter12" class="Frontend hidden">
+          <span>Ruby</span> <img class="delete" src="images/icon-remove.svg" />
+        </div>
+        <div id="filter13" class="Frontend hidden">
+          <span>Backend</span>
+          <img class="delete" src="images/icon-remove.svg" />
+        </div>
+        <div id="filter14" class="Frontend hidden">
+          <span>RoR</span> <img class="delete" src="images/icon-remove.svg" />
+        </div>
+        <div id="filter15" class="Frontend hidden">
+          <span>Vue</span> <img class="delete" src="images/icon-remove.svg" />
+        </div>
+        <div id="filter16" class="Frontend hidden">
+          <span>Django</span>
+          <img class="delete" src="images/icon-remove.svg" />
+        </div>
       </div>
-      <div id="filter2" class="Frontend nr2">
-        <span>Senior</span> <img class="delete2" src="images/icon-remove.svg" />
-      </div>
-      <div id="filter3" class="Frontend nr3">
-        <span>HTML</span> <img class="delete3" src="images/icon-remove.svg" />
-      </div>
-      <div id="filter4" class="Frontend nr4">
-        <span>CSS</span> <img class="delete4" src="images/icon-remove.svg" />
-      </div>
-      <div id="filter5" class="Frontend nr5">
-        <span>JavaScript</span>
-        <img class="delete5" src="images/icon-remove.svg" />
-      </div>
-      <div id="filter6" class="Frontend nr6">
-        <span>Fullstack</span>
-        <img class="delete6" src="images/icon-remove.svg" />
-      </div>
-      <div id="filter7" class="Frontend nr7">
-        <span>Midweight</span>
-        <img class="delete7" src="images/icon-remove.svg" />
-      </div>
-      <div id="filter8" class="Frontend nr7">
-        <span>Python</span> <img class="delete8" src="images/icon-remove.svg" />
-      </div>
-      <div id="filter9" class="Frontend nr7">
-        <span>React</span> <img class="delete9" src="images/icon-remove.svg" />
-      </div>
-      <div id="filter10" class="Frontend nr7">
-        <span>Junior</span>
-        <img class="delete10" src="images/icon-remove.svg" />
-      </div>
-      <div id="filter11" class="Frontend nr7">
-        <span>Sass</span> <img class="delete11" src="images/icon-remove.svg" />
-      </div>
-      <div id="filter12" class="Frontend nr7">
-        <span>Ruby</span> <img class="delete12" src="images/icon-remove.svg" />
-      </div>
-      <div id="filter13" class="Frontend nr7">
-        <span>Backend</span>
-        <img class="delete13" src="images/icon-remove.svg" />
-      </div>
-      <div id="filter14" class="Frontend nr7">
-        <span>RoR</span> <img class="delete14" src="images/icon-remove.svg" />
-      </div>
-      <div id="filter15" class="Frontend nr7">
-        <span>Vue</span> <img class="delete15" src="images/icon-remove.svg" />
-      </div>
-      <div id="filter16" class="Frontend nr7">
-        <span>Django</span>
-        <img class="delete16" src="images/icon-remove.svg" />
-      </div>
+      <div class="clear hidden">Clear</div>
     </div>
 
     <div class="container">
       <div class="list">
-        <div class="element one">
+        <div id="elementOne" class="element one">
           <div class="right">
             <img src="images/photosnap.svg" />
             <div class="specify">
@@ -98,7 +102,7 @@
             <span class="leftSpan">JavaScript</span>
           </div>
         </div>
-        <div class="element two">
+        <div id="elementTwo" class="element two">
           <div class="right">
             <img src="images/manage.svg" />
             <div class="specify">
