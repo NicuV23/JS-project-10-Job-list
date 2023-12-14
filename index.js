@@ -1,548 +1,174 @@
-"use strict";
+const filter = document.querySelector(".filterSub");
+const main = document.querySelector("main");
+const clear = document.querySelector(".clearBtn");
+const filterWrapper = document.querySelector(".filterWrapper");
 
-const buttons = document.querySelectorAll(".leftSpan");
-const sorting = document.querySelector(".sorting");
-const options = document.querySelectorAll(".Frontend");
-const erase = document.querySelectorAll(".delete");
-const clear = document.querySelector(".clear");
-const toolBar = document.querySelector(".toolBar");
-const elementOne = document.getElementById("elementOne");
-const elementTwo = document.getElementById("elementTwo");
+console.log(filter);
+console.log(main);
+console.log(clear);
+console.log(filterWrapper);
 
-console.log(options);
+let closes = [];
+let arr = [];
 
-clear.addEventListener("click", function () {
-  sorting.classList.add("hidden");
-  options[0].classList.add("hidden");
-  options[1].classList.add("hidden");
-  options[2].classList.add("hidden");
-  options[3].classList.add("hidden");
-  options[4].classList.add("hidden");
-  options[5].classList.add("hidden");
-  options[6].classList.add("hidden");
-  options[7].classList.add("hidden");
-  options[8].classList.add("hidden");
-  options[9].classList.add("hidden");
-  options[10].classList.add("hidden");
-  options[11].classList.add("hidden");
-  options[12].classList.add("hidden");
-  options[13].classList.add("hidden");
-  options[14].classList.add("hidden");
-  options[15].classList.add("hidden");
-});
+const header = document.querySelector("header");
 
-for (let i = 0; i < erase.length; i++) {
-  erase[i].addEventListener("click", function () {
-    options[i].classList.add("hidden");
-    checkSortingVisibility();
-  });
-}
+(async function () {
+  let res = await fetch("./data.json");
+  let data = await res.json();
 
-for (let i = 0; i < buttons.length; i++) {
-  buttons[0].addEventListener("click", function () {
-    sorting.classList.remove("hidden");
-    clear.classList.remove("hidden");
-    for (let i = 0; i < options.length; i++) {
-      options[0].classList.remove("hidden");
+  for (let curr of data) {
+    const container = document.createElement("div");
+    container.classList.add("container");
+    container.innerHTML = `<img src="${curr.logo}" alt="logo">
+        <div class="head">
+        <div class="wrapper">
+            <div class="top">
+                <h2>${curr.company}</h2>
+    
+                <div class="stat">
+                </div>
+            </div>
+    
+            <a href="#">${curr.position}</a>
+    
+            <ul class="availability">
+                <li>${curr.postedAt}</li>
+                <li>${curr.contract}</li>
+                <li>${curr.location}</li>
+            </ul>
+        </div>
+
+          <hr>
+          
+          <div class="tags">
+          </div>`;
+
+    if (curr.new) {
+      const span = document.createElement("span");
+      span.classList.add("new");
+      span.textContent = "New!";
+      container.querySelector(".stat").append(span);
     }
-    checkSortingVisibility();
-  });
-}
-
-for (let i = 0; i < buttons.length; i++) {
-  buttons[1].addEventListener("click", function () {
-    sorting.classList.remove("hidden");
-    clear.classList.remove("hidden");
-    for (let i = 0; i < options.length; i++) {
-      options[1].classList.remove("hidden");
+    if (curr.featured) {
+      container.classList.add("featured");
+      const span = document.createElement("span");
+      span.classList.add("feature");
+      span.textContent = "Featured";
+      container.querySelector(".stat").append(span);
     }
-    checkSortingVisibility();
-  });
-}
 
-for (let i = 0; i < buttons.length; i++) {
-  buttons[2].addEventListener("click", function () {
-    clear.classList.remove("hidden");
-    sorting.classList.remove("hidden");
-    for (let i = 0; i < options.length; i++) {
-      options[2].classList.remove("hidden");
+    let types = curr.position.split(" ");
+
+    const btn1 = document.createElement("button");
+    btn1.dataset.type = curr.role;
+    btn1.textContent = curr.role;
+    container.querySelector(".tags").appendChild(btn1);
+
+    const btn2 = document.createElement("button");
+    btn2.dataset.type = curr.level;
+    btn2.textContent = curr.level;
+    container.querySelector(".tags").appendChild(btn2);
+
+    for (l of curr.languages) {
+      const btn = document.createElement("button");
+      btn.dataset.type = l;
+      btn.textContent = l;
+      container.querySelector(".tags").appendChild(btn);
     }
-    checkSortingVisibility();
-  });
-}
-
-for (let i = 0; i < buttons.length; i++) {
-  buttons[3].addEventListener("click", function () {
-    clear.classList.remove("hidden");
-    sorting.classList.remove("hidden");
-    for (let i = 0; i < options.length; i++) {
-      options[3].classList.remove("hidden");
-      checkSortingVisibility();
+    for (t of curr.tools) {
+      const btn = document.createElement("button");
+      btn.dataset.type = t;
+      btn.textContent = t;
+      container.querySelector(".tags").appendChild(btn);
     }
+
+    main.appendChild(container);
+  }
+
+  const buttons = main.querySelectorAll(".tags button");
+  buttons.forEach((button) => {
+    button.onclick = () => {
+      filterType(button.dataset.type);
+      updateContainer();
+    };
   });
+})();
+
+clear.onclick = () => {
+  arr = [];
+  filter.innerHTML = "";
+  main
+    .querySelectorAll(".container")
+    .forEach((container) => container.classList.remove("remove"));
+  filter.closest(".filter").style.display = "none";
+};
+
+function addFilter() {
+  filter.innerHTML = "";
+  for (i of arr) {
+    const el = document.createElement("div");
+    el.classList.add("span");
+    el.innerHTML = `<p>${i}</p>
+        <button aria-label="remove button"><img src="images/icon-remove.svg" alt=""></button>`;
+    filter.appendChild(el);
+    filter.closest(".filter").style.display = "flex";
+
+    closes = [];
+    closes.push(el.querySelector("button"));
+    closes.forEach((close) => {
+      close.onclick = () => {
+        filter.removeChild(close.closest(".span"));
+        arr.splice(arr.indexOf(close.previousElementSibling.textContent), 1);
+        updateContainer();
+        if (filter.innerHTML) {
+          filter.closest(".filter").style.display = "flex";
+        } else {
+          filter.closest(".filter").style.display = "none";
+        }
+      };
+    });
+  }
 }
 
-for (let i = 0; i < buttons.length; i++) {
-  buttons[4].addEventListener("click", function () {
-    clear.classList.remove("hidden");
-    sorting.classList.remove("hidden");
-    for (let i = 0; i < options.length; i++) {
-      options[4].classList.remove("hidden");
-      checkSortingVisibility();
+function filterType(type) {
+  if (!arr.includes(type)) {
+    arr.push(type);
+    addFilter();
+  }
+}
+
+function updateContainer() {
+  const containers = main.querySelectorAll(".container");
+  containers.forEach((container) => {
+    const buttons = container.querySelectorAll("button");
+    let check = [];
+    for (i of buttons) {
+      check.push(i.dataset.type);
     }
-  });
-}
 
-for (let i = 0; i < buttons.length; i++) {
-  buttons[5].addEventListener("click", function () {
-    clear.classList.remove("hidden");
-    sorting.classList.remove("hidden");
-    for (let i = 0; i < options.length; i++) {
-      options[5].classList.remove("hidden");
-      checkSortingVisibility();
+    let include = true;
+    for (j of arr) {
+      if (!check.includes(j)) {
+        include = false;
+      }
     }
-  });
-}
-
-for (let i = 0; i < buttons.length; i++) {
-  buttons[6].addEventListener("click", function () {
-    clear.classList.remove("hidden");
-    sorting.classList.remove("hidden");
-    for (let i = 0; i < options.length; i++) {
-      options[6].classList.remove("hidden");
-      checkSortingVisibility();
-    }
-  });
-}
-
-for (let i = 0; i < buttons.length; i++) {
-  buttons[7].addEventListener("click", function () {
-    clear.classList.remove("hidden");
-    sorting.classList.remove("hidden");
-    for (let i = 0; i < options.length; i++) {
-      options[7].classList.remove("hidden");
-      checkSortingVisibility();
-    }
-  });
-}
-
-for (let i = 0; i < buttons.length; i++) {
-  buttons[8].addEventListener("click", function () {
-    clear.classList.remove("hidden");
-    sorting.classList.remove("hidden");
-    for (let i = 0; i < options.length; i++) {
-      options[8].classList.remove("hidden");
-      checkSortingVisibility();
-    }
-  });
-}
-
-for (let i = 0; i < buttons.length; i++) {
-  buttons[9].addEventListener("click", function () {
-    clear.classList.remove("hidden");
-    sorting.classList.remove("hidden");
-    for (let i = 0; i < options.length; i++) {
-      options[0].classList.remove("hidden");
-      checkSortingVisibility();
-    }
-  });
-}
-
-for (let i = 0; i < buttons.length; i++) {
-  buttons[10].addEventListener("click", function () {
-    clear.classList.remove("hidden");
-    sorting.classList.remove("hidden");
-    for (let i = 0; i < options.length; i++) {
-      options[9].classList.remove("hidden");
-      checkSortingVisibility();
-    }
-  });
-}
-
-for (let i = 0; i < buttons.length; i++) {
-  buttons[11].addEventListener("click", function () {
-    clear.classList.remove("hidden");
-    sorting.classList.remove("hidden");
-    for (let i = 0; i < options.length; i++) {
-      options[8].classList.remove("hidden");
-      checkSortingVisibility();
+    if (!include) {
+      container.classList.add("remove");
+    } else {
+      container.classList.remove("remove");
     }
   });
 }
 
-for (let i = 0; i < buttons.length; i++) {
-  buttons[12].addEventListener("click", function () {
-    clear.classList.remove("hidden");
-    sorting.classList.remove("hidden");
-    for (let i = 0; i < options.length; i++) {
-      options[10].classList.remove("hidden");
-      checkSortingVisibility();
-    }
-  });
+function changeBg() {
+  if (document.body.clientWidth < 700) {
+    header.style["background-image"] = "url(images/bg-header-mobile.svg)";
+  } else {
+    header.style["background-image"] = "url(images/bg-header-desktop.svg)";
+  }
 }
 
-for (let i = 0; i < buttons.length; i++) {
-  buttons[13].addEventListener("click", function () {
-    clear.classList.remove("hidden");
-    sorting.classList.remove("hidden");
-    for (let i = 0; i < options.length; i++) {
-      options[4].classList.remove("hidden");
-      checkSortingVisibility();
-    }
-  });
-}
+changeBg();
 
-for (let i = 0; i < buttons.length; i++) {
-  buttons[14].addEventListener("click", function () {
-    clear.classList.remove("hidden");
-    sorting.classList.remove("hidden");
-    for (let i = 0; i < options.length; i++) {
-      options[0].classList.remove("hidden");
-      checkSortingVisibility();
-    }
-  });
-}
-
-for (let i = 0; i < buttons.length; i++) {
-  buttons[15].addEventListener("click", function () {
-    clear.classList.remove("hidden");
-    sorting.classList.remove("hidden");
-    for (let i = 0; i < options.length; i++) {
-      options[9].classList.remove("hidden");
-      checkSortingVisibility();
-    }
-  });
-}
-
-for (let i = 0; i < buttons.length; i++) {
-  buttons[16].addEventListener("click", function () {
-    clear.classList.remove("hidden");
-    sorting.classList.remove("hidden");
-    for (let i = 0; i < options.length; i++) {
-      options[3].classList.remove("hidden");
-      checkSortingVisibility();
-    }
-  });
-}
-for (let i = 0; i < buttons.length; i++) {
-  buttons[17].addEventListener("click", function () {
-    clear.classList.remove("hidden");
-    sorting.classList.remove("hidden");
-    for (let i = 0; i < options.length; i++) {
-      options[4].classList.remove("hidden");
-      checkSortingVisibility();
-    }
-  });
-}
-for (let i = 0; i < buttons.length; i++) {
-  buttons[18].addEventListener("click", function () {
-    clear.classList.remove("hidden");
-    sorting.classList.remove("hidden");
-    for (let i = 0; i < options.length; i++) {
-      options[5].classList.remove("hidden");
-      checkSortingVisibility();
-    }
-  });
-}
-for (let i = 0; i < buttons.length; i++) {
-  buttons[19].addEventListener("click", function () {
-    sorting.classList.remove("hidden");
-    clear.classList.remove("hidden");
-    for (let i = 0; i < options.length; i++) {
-      options[6].classList.remove("hidden");
-      checkSortingVisibility();
-    }
-  });
-}
-for (let i = 0; i < buttons.length; i++) {
-  buttons[20].addEventListener("click", function () {
-    clear.classList.remove("hidden");
-    sorting.classList.remove("hidden");
-    for (let i = 0; i < options.length; i++) {
-      options[4].classList.remove("hidden");
-      checkSortingVisibility();
-    }
-  });
-}
-for (let i = 0; i < buttons.length; i++) {
-  buttons[20].addEventListener("click", function () {
-    clear.classList.remove("hidden");
-    sorting.classList.remove("hidden");
-    for (let i = 0; i < options.length; i++) {
-      options[4].classList.remove("hidden");
-      checkSortingVisibility();
-    }
-  });
-}
-for (let i = 0; i < buttons.length; i++) {
-  buttons[21].addEventListener("click", function () {
-    clear.classList.remove("hidden");
-    sorting.classList.remove("hidden");
-    for (let i = 0; i < options.length; i++) {
-      options[10].classList.remove("hidden");
-      checkSortingVisibility();
-    }
-  });
-}
-for (let i = 0; i < buttons.length; i++) {
-  buttons[22].addEventListener("click", function () {
-    clear.classList.remove("hidden");
-    sorting.classList.remove("hidden");
-    for (let i = 0; i < options.length; i++) {
-      options[11].classList.remove("hidden");
-      checkSortingVisibility();
-    }
-  });
-}
-for (let i = 0; i < buttons.length; i++) {
-  buttons[23].addEventListener("click", function () {
-    clear.classList.remove("hidden");
-    sorting.classList.remove("hidden");
-    for (let i = 0; i < options.length; i++) {
-      options[12].classList.remove("hidden");
-      checkSortingVisibility();
-    }
-  });
-}
-for (let i = 0; i < buttons.length; i++) {
-  buttons[24].addEventListener("click", function () {
-    clear.classList.remove("hidden");
-    sorting.classList.remove("hidden");
-    for (let i = 0; i < options.length; i++) {
-      options[9].classList.remove("hidden");
-      checkSortingVisibility();
-    }
-  });
-}
-for (let i = 0; i < buttons.length; i++) {
-  buttons[25].addEventListener("click", function () {
-    clear.classList.remove("hidden");
-    sorting.classList.remove("hidden");
-    for (let i = 0; i < options.length; i++) {
-      options[11].classList.remove("hidden");
-      checkSortingVisibility();
-    }
-  });
-}
-for (let i = 0; i < buttons.length; i++) {
-  buttons[26].addEventListener("click", function () {
-    clear.classList.remove("hidden");
-    sorting.classList.remove("hidden");
-    for (let i = 0; i < options.length; i++) {
-      options[13].classList.remove("hidden");
-      checkSortingVisibility();
-    }
-  });
-}
-for (let i = 0; i < buttons.length; i++) {
-  buttons[27].addEventListener("click", function () {
-    clear.classList.remove("hidden");
-    sorting.classList.remove("hidden");
-    for (let i = 0; i < options.length; i++) {
-      options[0].classList.remove("hidden");
-      checkSortingVisibility();
-    }
-  });
-}
-for (let i = 0; i < buttons.length; i++) {
-  buttons[28].addEventListener("click", function () {
-    clear.classList.remove("hidden");
-    sorting.classList.remove("hidden");
-    for (let i = 0; i < options.length; i++) {
-      options[9].classList.remove("hidden");
-      checkSortingVisibility();
-    }
-  });
-}
-for (let i = 0; i < buttons.length; i++) {
-  buttons[29].addEventListener("click", function () {
-    clear.classList.remove("hidden");
-    sorting.classList.remove("hidden");
-    for (let i = 0; i < options.length; i++) {
-      options[2].classList.remove("hidden");
-      checkSortingVisibility();
-    }
-  });
-}
-for (let i = 0; i < buttons.length; i++) {
-  buttons[30].addEventListener("click", function () {
-    clear.classList.remove("hidden");
-    sorting.classList.remove("hidden");
-    for (let i = 0; i < options.length; i++) {
-      options[10].classList.remove("hidden");
-      checkSortingVisibility();
-    }
-  });
-}
-for (let i = 0; i < buttons.length; i++) {
-  buttons[31].addEventListener("click", function () {
-    clear.classList.remove("hidden");
-    sorting.classList.remove("hidden");
-    for (let i = 0; i < options.length; i++) {
-      options[4].classList.remove("hidden");
-      checkSortingVisibility();
-    }
-  });
-}
-for (let i = 0; i < buttons.length; i++) {
-  buttons[32].addEventListener("click", function () {
-    clear.classList.remove("hidden");
-    sorting.classList.remove("hidden");
-    for (let i = 0; i < options.length; i++) {
-      options[0].classList.remove("hidden");
-      checkSortingVisibility();
-    }
-  });
-}
-for (let i = 0; i < buttons.length; i++) {
-  buttons[33].addEventListener("click", function () {
-    clear.classList.remove("hidden");
-    sorting.classList.remove("hidden");
-    for (let i = 0; i < options.length; i++) {
-      options[9].classList.remove("hidden");
-      checkSortingVisibility();
-    }
-  });
-}
-for (let i = 0; i < buttons.length; i++) {
-  buttons[34].addEventListener("click", function () {
-    clear.classList.remove("hidden");
-    sorting.classList.remove("hidden");
-    for (let i = 0; i < options.length; i++) {
-      options[14].classList.remove("hidden");
-      checkSortingVisibility();
-    }
-  });
-}
-for (let i = 0; i < buttons.length; i++) {
-  buttons[35].addEventListener("click", function () {
-    clear.classList.remove("hidden");
-    sorting.classList.remove("hidden");
-    for (let i = 0; i < options.length; i++) {
-      options[4].classList.remove("hidden");
-      checkSortingVisibility();
-    }
-  });
-}
-for (let i = 0; i < buttons.length; i++) {
-  buttons[36].addEventListener("click", function () {
-    clear.classList.remove("hidden");
-    sorting.classList.remove("hidden");
-    for (let i = 0; i < options.length; i++) {
-      options[10].classList.remove("hidden");
-      checkSortingVisibility();
-    }
-  });
-}
-for (let i = 0; i < buttons.length; i++) {
-  buttons[37].addEventListener("click", function () {
-    clear.classList.remove("hidden");
-    sorting.classList.remove("hidden");
-    for (let i = 0; i < options.length; i++) {
-      options[5].classList.remove("hidden");
-      checkSortingVisibility();
-    }
-  });
-}
-for (let i = 0; i < buttons.length; i++) {
-  buttons[38].addEventListener("click", function () {
-    clear.classList.remove("hidden");
-    sorting.classList.remove("hidden");
-    for (let i = 0; i < options.length; i++) {
-      options[6].classList.remove("hidden");
-      checkSortingVisibility();
-    }
-  });
-}
-for (let i = 0; i < buttons.length; i++) {
-  buttons[39].addEventListener("click", function () {
-    clear.classList.remove("hidden");
-    sorting.classList.remove("hidden");
-    for (let i = 0; i < options.length; i++) {
-      options[4].classList.remove("hidden");
-      checkSortingVisibility();
-    }
-  });
-}
-for (let i = 0; i < buttons.length; i++) {
-  buttons[40].addEventListener("click", function () {
-    clear.classList.remove("hidden");
-    sorting.classList.remove("hidden");
-    for (let i = 0; i < options.length; i++) {
-      options[15].classList.remove("hidden");
-      checkSortingVisibility();
-    }
-  });
-}
-for (let i = 0; i < buttons.length; i++) {
-  buttons[41].addEventListener("click", function () {
-    clear.classList.remove("hidden");
-    sorting.classList.remove("hidden");
-    for (let i = 0; i < options.length; i++) {
-      options[7].classList.remove("hidden");
-      checkSortingVisibility();
-    }
-  });
-}
-for (let i = 0; i < buttons.length; i++) {
-  buttons[42].addEventListener("click", function () {
-    clear.classList.remove("hidden");
-    sorting.classList.remove("hidden");
-    for (let i = 0; i < options.length; i++) {
-      options[0].classList.remove("hidden");
-      checkSortingVisibility();
-    }
-  });
-}
-for (let i = 0; i < buttons.length; i++) {
-  buttons[43].addEventListener("click", function () {
-    clear.classList.remove("hidden");
-    sorting.classList.remove("hidden");
-    for (let i = 0; i < options.length; i++) {
-      options[9].classList.remove("hidden");
-      checkSortingVisibility();
-    }
-  });
-}
-for (let i = 0; i < buttons.length; i++) {
-  buttons[44].addEventListener("click", function () {
-    clear.classList.remove("hidden");
-    sorting.classList.remove("hidden");
-    for (let i = 0; i < options.length; i++) {
-      options[8].classList.remove("hidden");
-      checkSortingVisibility();
-    }
-  });
-}
-for (let i = 0; i < buttons.length; i++) {
-  buttons[45].addEventListener("click", function () {
-    clear.classList.remove("hidden");
-    sorting.classList.remove("hidden");
-    for (let i = 0; i < options.length; i++) {
-      options[10].classList.remove("hidden");
-      checkSortingVisibility();
-    }
-  });
-}
-for (let i = 0; i < buttons.length; i++) {
-  buttons[46].addEventListener("click", function () {
-    clear.classList.remove("hidden");
-    sorting.classList.remove("hidden");
-    for (let i = 0; i < options.length; i++) {
-      options[4].classList.remove("hidden");
-      checkSortingVisibility();
-    }
-  });
-}
-
-function checkSortingVisibility() {
-  const visibleOptions = Array.from(options).filter(
-    (option) => !option.classList.contains("hidden")
-  );
-
-  sorting.classList.toggle("hidden", visibleOptions.length === 0);
-}
-
-while (options[0].classList.contains("hidden")) {
-  elementOne.classList.add("hidden");
-}
+window.onresize = changeBg;

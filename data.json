@@ -14,6 +14,7 @@
     "languages": ["HTML", "CSS", "JavaScript"],
     "tools": []
   },
+
   {
     "id": 2,
     "company": "Manage",
@@ -125,7 +126,7 @@
     "logo": "./images/eyecam-co.svg",
     "new": false,
     "featured": false,
-    "position": "Full Stack Engineer",
+    "position": "Fullstack Engineer",
     "role": "Fullstack",
     "level": "Midweight",
     "postedAt": "3w ago",
